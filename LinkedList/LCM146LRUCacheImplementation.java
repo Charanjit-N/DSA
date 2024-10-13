@@ -37,6 +37,7 @@ class LCM146LRUCacheImplementation {
         currentAfterHead.prev = nd;
     }
 
+    // Doesnt mean deleteing node reference just removing the pointers
     public void deleteNode(Node nd){    // TC->O(1)
         Node prevNode = nd.prev;
         Node afterNode = nd.next;

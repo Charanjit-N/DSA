@@ -96,7 +96,7 @@ class DoubleLinkedList{
         tail.prev = head;
     }
 
-    public void addNode(DLLNode curNode){
+    public void addNode(DLLNode curNode){   // Adding After head
         DLLNode initialAfterHead = head.next;
         curNode.next = initialAfterHead;
         curNode.prev = head;
@@ -105,6 +105,7 @@ class DoubleLinkedList{
         listSize++;
     }
 
+    // Doesnt mean deleteing node reference just removing the pointers
     public void removeNode(DLLNode curNode){
         DLLNode prevNode = curNode.prev;
         DLLNode afterNode = curNode.next;
