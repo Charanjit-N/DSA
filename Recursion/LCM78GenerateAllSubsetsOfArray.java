@@ -13,7 +13,7 @@ class LCM78GenerateAllSubsetsOfArray {
     public List<List<Integer>> subsets(int[] nums) {
         // Approach 1 : Using Recursion (Backtracking)
         // TC->O(2^n) 
-        // SC->O(n + n + n*(2^n)) = (approx) O(n*(2^n)) {n-> recursion stack space ; n-> list "ls" ; n*(2^n)-> list "res" to return the output }
+        // SC->O(n + n + n*(2^n)) = (approx) O(n*(2^n)) {n-> recursion stack space ; (approx)n->list "ls" (reusing same list all the time) ; n*(2^n)-> list "res" to return the output }
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> subset = new ArrayList<>();
         createSubset(nums, 0, res, subset);
