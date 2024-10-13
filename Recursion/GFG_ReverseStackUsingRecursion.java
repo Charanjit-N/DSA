@@ -17,13 +17,12 @@ class GFG_ReverseStackUsingRecursion
     static void reverse(Stack<Integer> s)  
     {
         // Approach 1 : 
-        /*TC->O(n^2){The reverse function is called 𝑛 n times, 
-        and each call to reverse subsequently calls pushingAtBottom, 
-        which itself takes O(n) time.}
+        /*TC->O(n^2){The reverse function is called  n times, 
+        and each call to reverse subsequently calls a few pushingAtBottom() functions, 
+        that take O(n) time.}
          SC->O(n) {The space complexity due to the recursion
           stack will be O(n) since the maximum depth 
-          of recursion will be n (in the case where the stack 
-          has n elements).}
+          of recursion will be n.
         */
         // if(s.size()==1) return;
         // int temp = s.peek();
