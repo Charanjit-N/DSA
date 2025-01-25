@@ -1,12 +1,12 @@
 class PrintSubsequencesWithSumK{
     // Function to calculate the number of subsets with a given sum
-    public int subsequencesWithSumK(int[] nums, int target) {
+    public void subsequencesWithSumK(int[] nums, int target) {
       
         List<Integer> ls = new ArrayList<>();
         int sum =0;
         findSubsequencesWithSumK(nums,0,sum,ls,target);
-        return 0;
-        // code here
+    
+        
     }
     
     void findSubsequencesWithSumK(int[] nums, int index, int sum , List<Integer> ls,int target){
