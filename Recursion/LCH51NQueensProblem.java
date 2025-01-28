@@ -82,7 +82,7 @@ class LCH51NQueensProblem {
 }
 
 
-// Optimization : Avoiding isSafToPlace() -->TC:O(3n) using Hashing
+// Optimization : Avoiding {isSafToPlace() -->TC:O(3n)} using Hashing
 class Solution {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> res = new ArrayList<>();
