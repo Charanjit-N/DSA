@@ -1,3 +1,4 @@
+// TC- > O(x^n) n-> (height of the recursion tree)  = length of digits string and x= 4 ( max 4 length string a digit is mapped)
 class LCM17LetterCombinationsOfaPhoneNumber {
     public List<String> letterCombinations(String digits) {
         List<String> ans = new ArrayList<>();
