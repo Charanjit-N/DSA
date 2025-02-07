@@ -1,4 +1,5 @@
 class LCE860LemonadeChange {
+    // TC-> O(n) , SC->O(1)
     public boolean lemonadeChange(int[] bills) {
         int fiveCnt = 0;
         int tenCnt =0;
