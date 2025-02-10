@@ -8,7 +8,7 @@ class LCM1838DoKModificationsToMakeMostFrequentElement {
         int total =0, ans=0;
         while(r<len){                 // O(n)
             total = total + nums[r];
-            while(nums[r]*(r-l+1) > total + k){
+            while(nums[r]*(r-l+1) - total >  k){
                 total =  total - nums[l];
                 l++;
             }
