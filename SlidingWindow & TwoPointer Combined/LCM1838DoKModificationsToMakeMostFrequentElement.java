@@ -1,3 +1,6 @@
+
+// Sliding window approach after sorting
+
 class LCM1838DoKModificationsToMakeMostFrequentElement {
     public int maxFrequency(int[] nums, int k) {
         // TC-> O(n*logn) + O(2*n) = (approx) O(n*logn)
