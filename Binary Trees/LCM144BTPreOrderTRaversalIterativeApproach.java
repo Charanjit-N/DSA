@@ -14,7 +14,7 @@
  * }
  */
 // TC-> O(N), SC->(N)  {N-> # nodes in Binary Tree}
-class LCM144BTPreOrderTRaversalIterativeApproach {
+class LCM144BTPreOrderTraversalIterativeApproach {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
        if(root == null) return ans;
