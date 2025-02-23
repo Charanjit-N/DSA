@@ -14,7 +14,7 @@
  * }
  */
 
-// TC->O(2N) , SC->O(2N)
+//Using two stacks :  TC->O(2N) , SC->O(2N)
 class LCE145BTPostOrderTraversalIterativeApproach {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> ls = new ArrayList<>();
