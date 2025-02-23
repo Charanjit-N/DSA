@@ -29,6 +29,7 @@ class LCE28FindIndexOfFirstOccuranceInAString {
     }
 }
 
+
 class LCE28FindIndexOfFirstOccuranceInAString {
     public int strStr(String haystack, String needle) {
         for(int i = 0, j = needle.length(); j<=haystack.length(); i++,j++){
