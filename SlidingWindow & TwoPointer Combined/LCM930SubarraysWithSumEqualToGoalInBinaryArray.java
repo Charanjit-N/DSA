@@ -1,4 +1,4 @@
-class LCM930CountSubarraysWithSumEqualToGoalInBinaryArray {       //-> Similar to LCM560 problem
+class LCM930SubarraysWithSumEqualToGoalInBinaryArray {       //-> Similar to LCM560 problem
     // This function returns the total no.of subarrays having sum <= goal
     int func(int[] nums,int goal){    // TC->O(2N) , SC->O(1)
         if(goal<0) return 0;
