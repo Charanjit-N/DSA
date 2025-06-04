@@ -5,7 +5,7 @@ if given arr = [a,b,c]  let's say we got and(a,b) = 0 , we need to include c and
 */
 
 
-// Optimal TC->O(n), SC->O(1)
+// Optimal : sliding Window  TC->O(n), SC->O(1)
 class LCM2401LongestSubarrayWithAndOfEachPairIsZero {
     public int longestNiceSubarray(int[] nums) {
         int n = nums.length;
@@ -14,7 +14,7 @@ class LCM2401LongestSubarrayWithAndOfEachPairIsZero {
         int or = 0;
         while(right<n){
             while((nums[right] & or) != 0){
-                or = or ^ nums[left];
+                or = or ^ nums[left];  //(1^1 = 0 :removes the numbers that resulted in bit 1 in 'or' so far form left)
                 left++;
             }
             maxLen = Math.max(maxLen, right-left+1);
