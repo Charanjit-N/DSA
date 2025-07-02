@@ -1,6 +1,24 @@
 
 // Recursion :TC->O(2^n) , SC->O(n) : recursion stack space
 class Solution {
+    int solve(int index , int target , int[] nums){
+        if(index ==0 ){
+                if(target-nums[0]==0 && target + nums[0] == 0) return 2;
+                else if(target-nums[0]==0 || target + nums[0] == 0) return 1;
+                else return 0;
+        }
+        int plus = solve(index-1 , target - nums[index] , nums);
+        int minus =  solve(index-1 , target+ nums[index] , nums);
+        return plus + minus;
+    }
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        return solve(n-1, target, nums);
+    }
+}
+
+// Recursion :TC->O(2^n) , SC->O(n) : recursion stack space
+class Solution {
     static int solve(int index, int target , int[] nums){
         if(index==0){
             if(target ==0 && nums[0] == 0) return 2;
@@ -12,14 +30,19 @@ class Solution {
         if(nums[index] <= target) pick = solve(index-1, target-nums[index], nums);
         return pick + notPick;
     }
- public int countPartitions(int n, int diff, int[] arr) {
+    int countPartitions(int n, int diff, int[] nums) {
         int totalSum=0;
         for(int i=0;i<n;i++){
-            totalSum +=  arr[i];
+            totalSum +=  nums[i];
         }
         if( totalSum-diff <0 || (totalSum-diff) %2==1 ) return 0;
         int target = (totalSum - diff)/2;
-        return solve(n-1, target , arr);
+        return solve(n-1, target , nums);
+    }
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        return countPartitions(n,target,nums);
+        
     }
 }
 
@@ -39,23 +62,27 @@ class Solution {
         if(nums[index] <= target) pick = solve(index-1, target-nums[index], nums,dp);
         return dp[index][target] = pick + notPick;
     }
-    public int countPartitions(int n, int diff, int[] arr) {
+    public int countPartitions(int n, int diff, int[] nums) {
         int totalSum=0;
         for(int i=0;i<n;i++){
-            totalSum +=  arr[i];
+            totalSum +=  nums[i];
         }
         if( totalSum-diff <0 || (totalSum-diff) %2==1 ) return 0;
         int target = (totalSum - diff)/2;
         int[][] dp = new int[n][target+1];
         for(int i=0;i<n;i++) Arrays.fill(dp[i],-1);
-        return solve(n-1, target , arr,dp);
+        return solve(n-1, target , nums,dp);
+    }
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        return countPartitions(n,target,nums);
+        
     }
 }
 
 
-
 // Tabulation :TC->O(nxtarget) , SC->O(nxtarget) : dp array
-class TUFCountPartitionsWithGivenDifference {
+class Solution {
     public static int countPartitions(int n, int diff, int[] nums) {
         int totalSum=0;
         for(int i=0;i<n;i++){
@@ -80,11 +107,17 @@ class TUFCountPartitionsWithGivenDifference {
         }
        return dp[n-1][target];
     }
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        return countPartitions(n,target,nums);
+        
+    }
 }
 
 
+
 // Tabulation with space optimization :TC->O(nxtarget) , SC->O(target) : extra arrays
-class TUFCountPartitionsWithGivenDifference {
+class Solution {
     public static int countPartitions(int n, int diff, int[] nums) {
         int totalSum=0;
         for(int i=0;i<n;i++){
@@ -112,5 +145,9 @@ class TUFCountPartitionsWithGivenDifference {
             }
         }
         return prev[target];
+    }
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        return countPartitions(n,target,nums);   
     }
 }
