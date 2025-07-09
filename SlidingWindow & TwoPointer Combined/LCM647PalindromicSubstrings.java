@@ -1,5 +1,8 @@
 
+
 // Brute Force: TC->O(n^2 * n = n^3) : generate All substrings(O(n^2)) and check palindrome or not(O(n))
+
+
 
 // Optimal using Two pointer approach
 // TC->O(n^2) , SC->O(1)
