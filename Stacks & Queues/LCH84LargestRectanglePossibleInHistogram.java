@@ -48,6 +48,7 @@ class LCH84LargestRectanglePossibleInHistogram {
             }
             st.push(i);
          }
+         System.out.println(st);
 
          while(!st.isEmpty()){
             nse = n;
