@@ -1,4 +1,3 @@
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -30,6 +29,7 @@ public class Codec {
         }
         return str.toString();
     }
+    
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         if(data  == "") return null;
@@ -51,6 +51,7 @@ public class Codec {
                 q.add(rightChild);
             }
         } 
+
         return root;
     }
 }
