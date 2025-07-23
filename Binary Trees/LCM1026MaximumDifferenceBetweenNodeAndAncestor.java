@@ -1,4 +1,4 @@
-// TC-> O(N * height) , SC->O(height)
+//Brute Force :  TC-> O(N * height) , SC->O(height)
 class Solution {
     void dfs(TreeNode node, List<TreeNode> ancest, int[] max){
         if(node == null) return ;
@@ -19,7 +19,7 @@ class Solution {
     }
 }
 
-// TC->O(N), SC->O(height)
+// Optimized : TC->O(N), SC->O(height)
 class Solution {
     int dfs(TreeNode node, int maxVal, int minVal){
         if(node == null) return maxVal - minVal ;
