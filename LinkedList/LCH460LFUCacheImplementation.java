@@ -1,121 +1,103 @@
 
-// Used  2 maps and in one map  we store DoubleLinkedLists.
+// Used  2 maps and in one map  we store <freq,DoubleLinkedLists> and in another we store all the nodes in our cache <key,DLLNode>
 
-class LCH460LFUCacheImplementation {
-    int capacity;
-    int curSize;
-    int minFrequency;
-    Map<Integer, DLLNode> cache;
-    Map<Integer, DoubleLinkedList> frequencyMap;
-
-
-    public LCH460LFUCacheImplementation(int capacity) {
-        this.capacity = capacity;   
-        this.curSize = 0;
-        this.minFrequency = 0;
-
-        this.cache = new HashMap<>();
-        this.frequencyMap = new HashMap<>();
-
-    }
-    public void updateNode(DLLNode curNode){
-        int curFreq = curNode.useCounter;
-        DoubleLinkedList curDLL = frequencyMap.get(curFreq);
-        curDLL.removeNode(curNode);
-
-        if(curFreq == minFrequency && curDLL.listSize == 0){
-            minFrequency++;
-        }
-
-        curNode.useCounter++;
-
-        DoubleLinkedList newDLL = frequencyMap.getOrDefault(curNode.useCounter, new DoubleLinkedList());
-        newDLL.addNode(curNode);
-        frequencyMap.put(curNode.useCounter, newDLL);
-    }
-    
-    public int get(int key) {
-        if(!cache.containsKey(key))  return -1;
-        DLLNode curNode  = cache.get(key);
-        updateNode(curNode);
-        return curNode.val;
-    }
-    
-    public void put(int key, int value) {
-        if(capacity ==0) return;
-        if(cache.containsKey(key)){
-            DLLNode curNode = cache.get(key);
-            curNode.val = value;
-            updateNode(curNode);
-        }
-        else{
-            curSize++;
-            if(curSize> capacity){
-                DoubleLinkedList minFreqDLL = frequencyMap.get(minFrequency);
-                
-                cache.remove(minFreqDLL.tail.prev.key);
-                minFreqDLL.removeNode(minFreqDLL.tail.prev);
-
-                curSize--;
-            }
-            minFrequency = 1;
-            DLLNode newNode = new DLLNode(key, value);
-
-            DoubleLinkedList curDLL = frequencyMap.getOrDefault(1, new DoubleLinkedList());
-            curDLL.addNode(newNode);
-            frequencyMap.put(1,curDLL);
-            cache.put(key, newNode);
-
-        }
-        
-    }
-}
+//TC for get(), put() --> O(1);
+// SC ->O(capacity);
 
 class DLLNode{
     int key;
     int val;
-    int useCounter;
-    DLLNode prev;
+    int useCount;
     DLLNode next;
-    public DLLNode(int key, int val){
+    DLLNode prev;
+    DLLNode(int key, int val){
         this.key = key;
         this.val = val;
-        this.useCounter = 1;
+        this.useCount =1;
     }
 }
-
 class DoubleLinkedList{
-    int listSize;
+    int listSize ;
     DLLNode head;
     DLLNode tail;
-    public DoubleLinkedList(){
-        this.listSize =0;
-        this.head = new DLLNode(0,0);
-        this.tail = new DLLNode(0,0);
+    DoubleLinkedList(){
+        this.listSize = 0;
+        this.head = new DLLNode(-1,-1);
+        this.tail = new DLLNode(-1,-1);
         head.next = tail;
         tail.prev = head;
     }
-
-    public void addNode(DLLNode curNode){   // Adding After head
-        DLLNode initialAfterHead = head.next;
-        curNode.next = initialAfterHead;
-        curNode.prev = head;
-        head.next = curNode;
-        initialAfterHead.prev = curNode;
+    public void insertAfterHead(DLLNode nd){   
+        DLLNode currentAfterHead = head.next;
+        head.next = nd;
+        nd.next = currentAfterHead;
+        nd.prev = head;
+        currentAfterHead.prev = nd;
         listSize++;
     }
-
-    // Doesnt mean deleteing node reference just removing the pointers
-    public void removeNode(DLLNode curNode){
-        DLLNode prevNode = curNode.prev;
-        DLLNode afterNode = curNode.next;
-
-        prevNode.next = afterNode;
-        afterNode.prev = prevNode;
+    void removeNode(DLLNode nd){
+        DLLNode nodePrev = nd.prev;
+        DLLNode nodeNext = nd.next;
+        nodePrev.next = nodeNext;
+        nodeNext.prev = nodePrev;
         listSize--;
     }
+}
+class LFUCache {
+    int minFreq;
+    int capacity;
+    int curSize ;
+    HashMap<Integer, DLLNode> cache;
+    HashMap<Integer, DoubleLinkedList> freqMap;
 
-
+    public LFUCache(int capacity) {
+        this.minFreq = 0;
+        this.curSize = 0;
+        this.capacity = capacity;
+        cache = new HashMap<>();
+        freqMap = new HashMap<>();
+    }
+    void updateNode(DLLNode nd){
+        int nodeFreq =  nd.useCount;
+        DoubleLinkedList nodeDLL = freqMap.get(nodeFreq);
+        nodeDLL.removeNode(nd);
+        if(nodeFreq == minFreq && nodeDLL.listSize==0){
+            minFreq++;
+        }
+        nd.useCount++;
+        DoubleLinkedList newDLL = freqMap.getOrDefault(nd.useCount,new DoubleLinkedList());
+        newDLL.insertAfterHead(nd);
+        freqMap.put(nd.useCount, newDLL);
+    }
+    public int get(int key) {
+        if(!cache.containsKey(key)) return -1;
+        DLLNode nd = cache.get(key);
+        updateNode(nd);
+        return nd.val;
+    }
+    public void put(int key, int value) {
+        if(capacity ==0) return;
+        if(cache.containsKey(key)){
+            DLLNode  nd =  cache.get(key);
+            nd.val =  value;
+            updateNode(nd);
+        }
+        else{
+            curSize++;
+            if(curSize >   capacity){     // (or) if(cache.size() == capacity) 
+                DoubleLinkedList minFreqDLL = freqMap.get(minFreq);
+                cache.remove(minFreqDLL.tail.prev.key);
+                minFreqDLL.removeNode(minFreqDLL.tail.prev);
+                curSize--;
+            }
+            minFreq = 1;
+            DLLNode newNode = new DLLNode(key,value);
+            DoubleLinkedList nodeDLL =  freqMap.getOrDefault(1,new DoubleLinkedList());
+            nodeDLL.insertAfterHead(newNode);
+            freqMap.put(1,nodeDLL);
+            cache.put(key, newNode);
+        }
+    }
 }
 
 /**
