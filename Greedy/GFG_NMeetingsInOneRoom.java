@@ -1,33 +1,32 @@
-// TC-> O(n + nlogn + n ) = (approx) O(n*logn)
-// SC-> O(3*n)  : 3 vriables in each Meeting Object such 'n' object in array list "ls"
-class Meeting{
+// TC->O(n*logn), SC->O(n)
+class Pair{
     int start;
     int end;
-    int meetingNum;
-    Meeting(int start,int end,int meetingNum ){
+    Pair(int start, int end){
         this.start = start;
         this.end = end;
-        this.meetingNum = meetingNum;
     }
 }
-class GFG_NMeetingsInOneRoom {
+
+class Solution {
     public int maxMeetings(int start[], int end[]) {
-        ArrayList<Meeting> ls = new ArrayList<>();
-        for(int i=0;i<start.length;i++){
-            ls.add(new Meeting(start[i],end[i],i+1));
+        int n = start.length;
+        if(n==0) return 0;
+        ArrayList<Pair> ls = new ArrayList<>();
+        for(int i =0;i<n;i++){
+            ls.add(new Pair(start[i], end[i]));
         }
-        ls.sort(Comparator.comparingInt(o -> o.end));
-        // for(int i=0;i<ls.size();i++){
-        //     System.out.print(ls.get(i).end+" ");
-        // }
-        int ans = 1;
-        int prevEnd = ls.get(0).end;
-        for(int i=1;i<ls.size();i++){
-            if(ls.get(i).start > prevEnd){
+        Collections.sort(ls,(x,y)->x.end-y.end);
+        int cnt = 1;
+        int prevEnd =  ls.get(0).end;
+        for(int i=1;i<n;i++){
+            int curStart = ls.get(i).start;
+            if(curStart > prevEnd){
+                cnt++;
                 prevEnd = ls.get(i).end;
-                ans++;
             }
+            
         }
-        return ans;    
+        return cnt;
     }
 }
