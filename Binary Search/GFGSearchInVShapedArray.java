@@ -13,7 +13,7 @@ class Solution{
                 high = mid;
             }
         }
-        return low;
+        return low;  //(or) return high;
     }
     // TC ->O(log n)
     int BSInDecreasinigArray(int[] arr, int low, int high ,int key){

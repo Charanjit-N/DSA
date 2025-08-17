@@ -1,5 +1,4 @@
 class LCM81SearchInRotatedSortedArray2 {
-
     //Optimal (Binary Search) :TC->O(logn) , SC->O(1)
     public boolean search(int[] nums, int target) {
         int low = 0;
