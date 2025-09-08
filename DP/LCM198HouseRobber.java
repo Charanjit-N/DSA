@@ -1,5 +1,20 @@
 // Recursion , TC-> exponential
 class Solution {
+    static int robber(int index,int[] nums){
+        if(index == nums.length-1) return nums[index];
+        if(index >= nums.length) return  0;
+
+        int pick  = nums[index] + robber(index+2, nums);
+        int notPick =  0 + robber(index+1, nums);
+        return Math.max(pick, notPick); 
+    }
+    static int rob(int[] nums) {
+       return  robber(0,nums);
+    }
+}
+
+// Recursion , TC-> exponential
+class Solution {
     int robber(int index,int[] nums){
         if(index == 0) return nums[index];
         if(index < 0) return  0;
