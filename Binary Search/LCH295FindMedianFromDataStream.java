@@ -1,6 +1,7 @@
 
 // Brute Force : TLE 
-class MedianFinder {
+class Solution {
+
     PriorityQueue<Integer> pq;
     public MedianFinder() {
         pq=  new PriorityQueue<>();
@@ -37,7 +38,48 @@ class MedianFinder {
     }
 }
 
+// Better : Maintaining a sorted list
+class Solution {
 
+    ArrayList<Integer> ls;
+
+    public MedianFinder() {
+        ls = new ArrayList<>();
+    }
+    
+    // TC -> O(logn) + O(n)  = O(n) woest case
+    public void addNum(int num) {
+        int low = 0;
+        int high = ls.size()-1;
+        int ans = -1;
+        while(low <= high){   // O(log n)
+            int mid =  low + (high - low)/2;
+            if(ls.get(mid) <= num){
+                ans =  mid;
+                low = mid +1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+
+        int addPosition = ans + 1;
+        ls.add(addPosition , num);   // takes O(n) worst case
+    }
+    
+    // TC -> O(1)
+    public double findMedian() {
+        int size = ls.size();
+        if(size % 2==  1){
+            return (double)(ls.get(size/2));
+        }
+        return ((double)(ls.get(size/2))+ls.get(size/2-1))/2;
+        
+    }
+}
+
+
+// Optimal : Using two Priority Queues(max , min heaps) 
 class MedianFinder {
     PriorityQueue<Integer> maxHeap;
     PriorityQueue<Integer> minHeap;
@@ -51,7 +93,7 @@ class MedianFinder {
          if(maxHeap.size() > minHeap.size() + 1){
             minHeap.add(maxHeap.poll());
          }
-         if(maxHeap.size()>0 && minHeap.size() > 0  &&               maxHeap.peek() > minHeap.peek()){
+         if(maxHeap.size()>0 && minHeap.size() > 0  && maxHeap.peek() > minHeap.peek()){
             minHeap.add(maxHeap.poll());
             if(minHeap.size() >  maxHeap.size()+1){
                 maxHeap.add(minHeap.poll());
@@ -62,7 +104,7 @@ class MedianFinder {
     public double findMedian() {
         int a = maxHeap.size();
         int b = minHeap.size();
-        if((a+b) % 2 == 0) return ((double)maxHeap.peek() +            minHeap.peek())/2;
+        if((a+b) % 2 == 0) return ((double)maxHeap.peek() + minHeap.peek())/2;
         else{
             if(a > b) return maxHeap.peek();
             else return minHeap.peek();
