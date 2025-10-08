@@ -6,14 +6,14 @@ class TrieNode{
         isEndOfWord = false;
     }
 }
-
-class TrieImplementation{
+class Trie{
     
     TrieNode root;
-    TrieImplementation() {
+    Trie() {
         root =  new TrieNode();
     }
 
+    // Inserts word into Trie
     // O(n) Here n is the length of the string inserted
     void insert(String word ){
         TrieNode nd = root;
@@ -28,6 +28,7 @@ class TrieImplementation{
         nd.isEndOfWord = true;
     }
 
+    // Check if given word exixts in the Trie
     // O(n) Here n is the length of the string searched
     boolean search(String word){
         TrieNode nd = root;
@@ -39,12 +40,12 @@ class TrieImplementation{
         return nd.isEndOfWord;
     }
 
-    	
+    // Check is there i any word in Trie that starts with the given prefix    	
     //O(n) Here n is the length of the string searched
-    boolean isPrefix(String key){   // startsWith(String key)
+    boolean startsWith(String prefix){   
         TrieNode nd = root;
-        for(int i=0;i<key.length();i++){
-            char ch  = key.charAt(i);
+        for(int i=0;i<prefix.length();i++){
+            char ch  = prefix.charAt(i);
             if(nd.children[ch-'a'] == null) return false;
             nd = nd.children[ch-'a']; 
         }
@@ -54,16 +55,16 @@ class TrieImplementation{
 
     public static void main(String[] args)
     {
-        TrieImplementation trie = new TrieImplementation();
+        Trie obj = new Trie();
         String[] arr = {"and", "ant", "do", "dad"};
         for (String s : arr) {
-            trie.insert(s);
+            obj.insert(s);
         }
         String[] searchKeys = { "do", "gee", "bat" };  
         // true false false
 
         for (String s : searchKeys) {
-            if (trie.search(s))
+            if (obj.search(s))
                 System.out.print("true ");
             else
                 System.out.print("false ");
@@ -72,7 +73,7 @@ class TrieImplementation{
         String[] prefixKeys = { "ge", "ba", "do", "de","an" };  
         // false false true false true
         for (String s : prefixKeys) {
-            if (trie.isPrefix(s))
+            if (obj.startsWith(s))
                 System.out.print("true ");
             else
                 System.out.print("false ");
