@@ -1,4 +1,4 @@
-// TC -> O(n)  , SC->O(log n) n : # nides in tree
+// TC -> O(n)  , SC->O(log n) n : # nodes in tree
 class Solution {
     void solve(TreeNode nd, int[] sum){
         if(nd == null) return;
@@ -16,3 +16,6 @@ class Solution {
         
     }
 }
+
+
+
