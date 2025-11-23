@@ -10,12 +10,8 @@ class LCM525LongestSubarrayWithEqual0sAnd1sInBinaryArray. {
         int maxLen =0;
         Map<Integer,Integer> map = new HashMap<>();
         map.put(0,-1);
-        for(int i=0;i<n;i++)
-        {
-            // if(nums[i]==0){ preSum = preSum + (-1);}
-            // else{ preSum =preSum+nums[i]; }
+        for(int i=0;i<n;i++){
             preSum += (nums[i]==0) ? -1 : nums[i];
-            
             if(map.containsKey(preSum)){
                 int len = i - map.get(preSum);
                 maxLen = Math.max(maxLen , len);
@@ -27,3 +23,5 @@ class LCM525LongestSubarrayWithEqual0sAnd1sInBinaryArray. {
         return maxLen;
     }
 }
+
+
