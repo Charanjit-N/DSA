@@ -2,21 +2,19 @@ class LCM1248SubarraysWithNoOfOddNumbersEqualToK{
 
     // This function returns the total no.of subarrays having number of odd numbers(i.e., sum) <= k 
     int func(int[] nums,int k){    // TC->O(2N) , SC->O(1)
-        if(k<0) return 0;
-        int n= nums.length;
-        int l=0,r=0;
-        int cnt = 0;
-        int odd =0;
-        while(r<n){
-            if(nums[r]%2==1) odd++;
-            while(odd > k){
-                if(nums[l]%2==1) odd--;
-                l++;
+        int n = nums.length;
+        int left = 0, right = 0,oddCount = 0, result = 0;
+        while(right <  n) {
+            if (nums[right] % 2 ==1 ) oddCount++;
+            while (oddCount > k) {
+                if (nums[left] % 2 == 1) oddCount--;
+                left++;
             }
-            cnt = cnt + (r-l+1); 
-            r++;
+            result += right - left + 1;
+            right++;
         }
-        return cnt;
+        return result;
+        
     }
 
     public int numberOfSubarrays(int[] nums, int k) {
