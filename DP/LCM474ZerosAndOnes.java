@@ -14,6 +14,7 @@ class Solution {
             cnt[i][1] = cnt1;
         }
         
+        // base case
         int[][][] dp = new int[len][m+1][n+1];
         for(int j=0;j<=m;j++){
             for(int k=0;k<=n;k++){
