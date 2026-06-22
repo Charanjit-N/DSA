@@ -28,7 +28,7 @@ class Trie{
         nd.isEndOfWord = true;
     }
 
-    // Check if given word exixts in the Trie
+    // Check if given word exists in the Trie
     // O(n) Here n is the length of the string searched
     boolean search(String word){
         TrieNode nd = root;
@@ -40,7 +40,7 @@ class Trie{
         return nd.isEndOfWord;
     }
 
-    // Check is there i any word in Trie that starts with the given prefix    	
+    // Check if there is any word in Trie that starts with the given prefix    	
     //O(n) Here n is the length of the string searched
     boolean startsWith(String prefix){   
         TrieNode nd = root;
