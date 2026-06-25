@@ -2,7 +2,7 @@
 //Time: O(n log n) (because each insertion / ceilingEntry in TreeMap is O(log n))
 // Space: O(n) for the prefix sums in TreeMap
 
-public class LongesSolutiontSubarraySumLEK {
+public class Solution {
     public static int longestSubarray(int[] nums, int k) {
         int n = nums.length;
         long prefixSum = 0;
@@ -15,7 +15,7 @@ public class LongesSolutiontSubarraySumLEK {
         for (int i = 0; i < n; i++) {
             prefixSum += nums[i];
 
-            // find the smallest prefixSum >= prefixSum - k
+            // find the smallest prefixSum >= curr prefixSum - k
             Long target = prefixSum - k;
             Map.Entry<Long, Integer> entry = map.ceilingEntry(target);
             if (entry != null) {
