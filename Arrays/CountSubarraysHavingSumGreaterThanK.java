@@ -8,7 +8,7 @@ public class Main {
     static long count;
     static long countSubarraysGreaterThanK(int[] nums, long k) {
         int n = nums.length;
-        long[] prefix = new long[n + 1];
+        long[] prefix = new long[n + 1];  // to store prefix[0] = 0 : to handle subarrays starting from start of array
         for (int i = 0; i < n; i++) {
             prefix[i + 1] = prefix[i] + nums[i];
         }

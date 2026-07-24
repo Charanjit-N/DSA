@@ -27,8 +27,6 @@ for every preSum[j]  we find the preSum having sum > preSum[i] + k using upperBo
     int countSubarraysAbsoluteSumGreterThanK(int[] arr, int k){
         int n = arr.length;
         int[] preSum = new int[n];
-        // int[] preSum = {-2,-1,3,4};
-        
         preSum[0] = arr[0];
         int cnt = 0;
         if(preSum[0] > k || preSum[0] < -1*k){
